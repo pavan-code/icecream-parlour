@@ -1,0 +1,9 @@
+.active {
+    background-color: #4343bb;
+    color: white;
+}
+mat-flat-button {
+    border: none;
+    outline: none;
+    margin-right: 5px;
+}

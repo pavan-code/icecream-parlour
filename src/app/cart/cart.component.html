@@ -1,0 +1,23 @@
+<div fxFlex class="container" fxLayout='column' fxLayoutAlign='center'>
+    <div fxFlex>
+        <h1>Cart items</h1>
+    </div>
+    <div fxFlex *ngIf = "cart">
+        <mat-grid-list cols='1' rowHeight = "220px">
+            <mat-grid-tile *ngFor = "let dish of cart">
+                
+                <img width="300px" height="200px" src="{{'http://localhost:3000/' + dish.image}}" alt={{dish.name}}>
+                <div class="details">
+                    <h1>{{dish.name | uppercase}} </h1>
+                    <h3>Quantity:{{quantity}} </h3>
+                    <input type="number" [(ngModel)]='quantity' min="0">
+                    <h2>Price :{{dish.price | currency: 'INR'}}</h2>
+                </div>
+            </mat-grid-tile>
+        </mat-grid-list>
+        
+    </div>
+    <div *ngIf='!cart'>
+        <mat-spinner></mat-spinner><h4>Loading . . . Please wait</h4>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+mat-grid-tile {
+    width: 60%;
+    /* border: 1px solid; */
+}
+mat-grid-tile img {
+    position: absolute;
+    left: 0;
+    margin: 5px;
+}
+.details {
+    position: absolute;
+    left: 350px;
+}
