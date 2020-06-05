@@ -2,11 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { dish } from '../shared/dish'
 import { DishserviceService } from '../services/dishservice.service';
 // import { Observable } from 'rxjs/Observable'
-
+import { expand,visibility, flyInOut } from '../app.animation'
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.css']
+  styleUrls: ['./menu.component.css'],
+  host: {
+    '[@flyInOut]': 'true',
+    'style': 'display:block'
+  },
+  animations: [
+    expand(),
+    visibility(),
+    flyInOut()
+  ]
 })
 export class MenuComponent implements OnInit {
   selectedDish: dish;

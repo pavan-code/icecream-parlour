@@ -1,13 +1,28 @@
 mat-grid-tile {
-    width: 60%;
-    /* border: 1px solid; */
+    /* display: flexbox; */
+    width: 500px;
+    /* flex-direction: column; */
+    border: 1px solid;
 }
 mat-grid-tile img {
     position: absolute;
     left: 0;
-    margin: 5px;
+    width: 280px;
+    height: inherit;
+    /* margin: 5px; */
+    border-right: 1px solid;
 }
 .details {
     position: absolute;
-    left: 350px;
+    left: 320px;
+    margin: 5px;
+    height: auto;
 }
+.details h2 {
+    margin: 2px;
+}
+input {
+    width: 70px;
+}
+
+

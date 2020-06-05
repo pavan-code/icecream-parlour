@@ -1,29 +1,30 @@
 <mat-toolbar color='primary'>
-    <span><img src="" alt="logo"></span>
-    <button mat-flat-button routerLinkActive='active' routerLink = "/home">Home</button>
-    <button mat-flat-button routerLinkActive='active' routerLink = "/menu">Menu</button>
-    <button mat-flat-button routerLinkActive='active' routerLink = '/cart'>Cart</button>
+    <span><img style="border-radius: 10px;" width="40px" src="http://localhost:3000/images/logo.png" alt="logo"></span>
+    <button color='primary' mat-flat-button routerLinkActive='active' routerLink = "/home">Home</button>
+    <button color='primary' mat-flat-button routerLinkActive='active' routerLink = "/menu">Menu</button>
+    <button color='primary' mat-flat-button routerLinkActive='active' routerLink = '/cart'>Cart</button>
     <span class="flex-spacer"></span>
     <!-- <button mat-raised-button routerLink = '/about'>About</button> -->
     <!-- <button mat-raised-button routerLink = '/contact'>Contact us</button> -->
 </mat-toolbar>
 
 <div class="container jumbotron"
+      
       fxLayout="row"
       fxLayout.sm="column" 
       fxLayout.xs="column" 
       fxLayoutAlign.xs="start center"
       fxLayoutAlign.sm="start center" 
-      fxLayoutAlign.gt-sm="center center" 
+      
       fxLayoutGap="0px">
   
-    <div fxFlex fxFlex.gt-sm="50%">
-        <h1>Ice cream parlour</h1>
-      <p>We take inspiration from the World's best cuisines, and create a unique fusion experience. Our lipsmacking creations
+    <div fxFlex fxFlex.gt-sm="80%">
+        <h1 style="font-size: 32px;">Dream Creams Ice cream parlour</h1>
+      <p style="font-size: 22px; font-family: cursive; line-height: 30px;">We take inspiration from the World's best cuisines, and create a unique fusion experience. Our lipsmacking creations
         will tickle your culinary senses!</p>
     </div>
     <div fxFlex fxFlex.gt-sm="20%">
-      
+      <img style="border-radius: 10px; width: 200px; height: 200px; opacity: 0.8;" src="http://localhost:3000/images/logo.png" alt="logo">
     </div>
     
   </div>

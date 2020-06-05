@@ -7,6 +7,8 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { switchMap } from 'rxjs/operators';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar'
+import { HttpmsgService } from '../services/httpmsg.service';
 
 
 @Component({
@@ -38,21 +40,18 @@ export class DishdetailComponent implements OnInit {
     }
   }
   cartDish: dish;
+  errMsg: any;
 
   constructor(private dishService: DishserviceService,
               private cartService: CartService,
               private route: ActivatedRoute,
               private location: Location,
-              private fb: FormBuilder) { }
+              private fb: FormBuilder,
+              private snackBar: MatSnackBar,
+              private httpMsgService: HttpmsgService) { }
 
   ngOnInit(): void {
     this.dishService.getDishIds().subscribe(dishIds => this.dishIds = dishIds)
-    // let id = this.route.snapshot.params['id']
-    // this.dishService.getDish(id)
-    // .subscribe(dish => {
-    //   this.dish= dish;
-    //   this.setPrevNext(dish.id);
-    // });
     this.createForm();
     let id = this.route.params
      .pipe(switchMap((params : Params) => {  return this.dishService.getDish(params['id']); }))
@@ -61,7 +60,20 @@ export class DishdetailComponent implements OnInit {
        this.dishCopy = dish;
        this.setPrevNext(dish.id);
       
-      });
+      },
+      error => {
+        this.dish = null;
+        this.dishCopy = null;
+        this.errMsg = error;
+      }
+      );
+  }
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 5000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top'
+    })
   }
   setPrevNext(id: string) {
     const index = this.dishIds.indexOf(id);
@@ -106,6 +118,13 @@ export class DishdetailComponent implements OnInit {
     .subscribe(dish => {
       this.dish = dish;
       this.dishCopy = dish;
+      // console.log("Comment posted successfully");
+      this.openSnackBar("Comment posted successfully", "close")
+      },
+      error => {
+        this.dishCopy = null;
+        this.dish = null;
+        this.errMsg = error;
       })
       this.commentForm.reset({
         author: '',
@@ -115,22 +134,28 @@ export class DishdetailComponent implements OnInit {
   }
 
   addToCart(dishId: string) {
-    // console.log(dishId); 
-    
     this.dishService.getDish(dishId)
     .subscribe(cartDish => {
       this.cartDish = cartDish;
-      console.log(this.cartDish);
-      this.cartService.addCart(this.cartDish).subscribe(cartDish => this.cartDish = cartDish);
+      this.cartDish['quantity']=1;
+      this.cartService.addCart(this.cartDish)
+      .subscribe(cartDish => {
+         this.cartDish = cartDish;
+         this.openSnackBar("Item added to the cart successfully", "close")        
+        }, error => {
+          this.errMsg = error;
+          this.openSnackBar("Item is already in the cart","close");
+        });
       })
     }
-    
-    // console.log(this.cartDish);
-    // let id = this.route.params
-    //  .pipe(switchMap((params : Params) => {  return this.dishService.getDish(params['id']); }))
-    //  .subscribe(dish => {
-    //    this.cartDish = dish;               
-    //   });
-    //   console.log(this.cartDish);
 
+    // $(function() {
+    //   $( "i" ).click(function() {
+    //     $( "i,span" ).toggleClass( "press", 1000 );
+    //   });
+    // });
+    classApplied=false;
+    like() {
+      this.classApplied = !this.classApplied;
+    }
 }

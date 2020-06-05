@@ -27,6 +27,7 @@ import { FeedbackService } from './services/feedback.service'
 import { CartService } from './services/cart.service'
 import { MatInputModule } from '@angular/material/input'
 import { MatSliderModule } from '@angular/material/slider'
+import { MatSnackBarModule } from '@angular/material/snack-bar'
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,7 +57,8 @@ import { MatSliderModule } from '@angular/material/slider'
     FormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSliderModule
+    MatSliderModule,
+    MatSnackBarModule
 
   ],
   providers: [

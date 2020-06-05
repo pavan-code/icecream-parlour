@@ -1,0 +1,13 @@
+h1 {
+    font-size: 30px;
+}
+
+p, pre {
+    font-size: 20px;
+    /* font-family: monospace; */
+    line-height: 24px;
+    justify-content: center;
+}
+/* mat-card {
+    width: 300px;
+} */

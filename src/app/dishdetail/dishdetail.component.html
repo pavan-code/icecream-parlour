@@ -23,8 +23,12 @@ fxLayoutGap.xs="0" >
                 </mat-card-content>
                 <mat-card-actions>
                     <button mat-button [routerLink]="['/dishdetail', prev]"><span class="fa fa-chevron-left"></span></button>
-                    <button color='primary' mat-raised-button>Like</button>
+                    <!-- <button color='primary' mat-raised-button>Like</button> -->
                     <!-- <button mat-raised-button>Share</button> -->
+                    <div fxFlex class="like">
+                        <i [class.press]='classApplied' (click)="like()"></i>
+                        <span [class.press]='classApplied' class="liked">liked!</span>
+                      </div>
                     <button mat-button (click) = 'goBack()'>Back</button>
                     <!-- <span class="flex-spacer"></span> -->
                     <button mat-button (click) ="addToCart(dish.id)">Add to cart</button>
@@ -32,20 +36,13 @@ fxLayoutGap.xs="0" >
                 </mat-card-actions>
             </mat-card>
         </div>
-        <div fxFlex [hidden] = 'dish'>
+        <div fxFlex [hidden] = 'dish || errMsg'>
             <mat-spinner></mat-spinner><h4>Loading . . . Please wait</h4>
         </div>
     </div>
 
     <div fxFlex = '40' *ngIf = "dish" fxLayout='column'>
-        <!-- <mat-list>
-            <h2>Comments</h2>
-            <mat-list-item *ngFor = "let comment of dish.comments">
-                <h4 matLine>{{comment.comment}} </h4>
-                <p matLine>{{comment.rating}} Stars </p>
-                <p matLine>-- {{comment.author}} {{comment.date | date}} </p>
-            </mat-list-item>
-        </mat-list> -->
+
         <div fxFlex *ngIf = "commentForm.valid">
             <h2>Comment preview</h2>
             <mat-list>

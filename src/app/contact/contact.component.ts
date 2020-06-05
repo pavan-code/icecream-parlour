@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { feedback } from '../shared/feedback';
 import { FeedbackService } from '../services/feedback.service';
+import { MatSnackBar } from '@angular/material/snack-bar'
 
 @Component({
   selector: 'app-contact',
@@ -13,7 +14,8 @@ export class ContactComponent implements OnInit {
   display: boolean;
 
   constructor(private fb: FormBuilder,
-    private feedbackService: FeedbackService) { }
+    private feedbackService: FeedbackService,
+    private snackBar: MatSnackBar) { }
 
   formErrors = {
     'firstName' : '',
@@ -51,6 +53,14 @@ export class ContactComponent implements OnInit {
   }
   feedbackForm : FormGroup
   feedback: feedback;
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 3000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top'
+    })
+  }
   createForm() {
     this.feedbackForm = this.fb.group({
       firstName: ['', [Validators.required,Validators.minLength(2), Validators.maxLength(20)]],
@@ -91,6 +101,8 @@ export class ContactComponent implements OnInit {
     setTimeout(() => {
       this.feedbackCopy=null;
       this.display = false;
+    this.openSnackBar("Feedback posted successfully", "close");
+
     }, 5000);
     this.feedbackForm.reset({
       firstName: '',

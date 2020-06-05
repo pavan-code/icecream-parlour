@@ -1,23 +1,30 @@
-<div fxFlex class="container" fxLayout='column' fxLayoutAlign='center'>
+<div fxFlex class="container" fxLayoutGap="20px" fxLayout='column' fxLayoutAlign='center'>
     <div fxFlex>
         <h1>Cart items</h1>
     </div>
+    <div *ngIf = "empty">
+        <h1>No items in the cart to display! <br> Ahead to MENU and add some items to the cart..</h1>
+    </div>
     <div fxFlex *ngIf = "cart">
-        <mat-grid-list cols='1' rowHeight = "220px">
-            <mat-grid-tile *ngFor = "let dish of cart">
-                
-                <img width="300px" height="200px" src="{{'http://localhost:3000/' + dish.image}}" alt={{dish.name}}>
-                <div class="details">
+        <mat-grid-list cols='2' rowHeight = "220px">
+            <mat-grid-tile *ngFor = "let dish of cart" [@expand]>        
+                <img fxFlex='100' src="{{'http://localhost:3000/' + dish.image}}" alt={{dish.name}}>
+                <div fxFlex='100' class="details">
                     <h1>{{dish.name | uppercase}} </h1>
-                    <h3>Quantity:{{quantity}} </h3>
-                    <input type="number" [(ngModel)]='quantity' min="0">
-                    <h2>Price :{{dish.price | currency: 'INR'}}</h2>
+                    <h2>Quantity: <span>{{dish.quantity}}</span></h2>
+                    <input type="number" #input min="0">
+                    <button color='primary' mat-button (click)="inputQuant(input.value, dish.id)">Apply</button>
+                    <h2>Price : {{dish.price | currency: 'INR'}}</h2>
+                    <button color='warn' mat-button (click) = "remove(dish.id)">Remove from cart</button>
                 </div>
             </mat-grid-tile>
         </mat-grid-list>
-        
     </div>
+    
     <div *ngIf='!cart'>
         <mat-spinner></mat-spinner><h4>Loading . . . Please wait</h4>
+    </div>
+    <div id="cost" fxFlex fxLayoutAlign='center' *ngIf = "!empty">
+        <h2>Total cost : </h2> <h1>  {{ totalCost | currency:'INR'}} </h1>
     </div>
 </div>
