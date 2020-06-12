@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { dishes } from '../shared/dishes';
+
 import { dish } from '../shared/dish'
 import { Observable } from 'rxjs';
 import { HttpClient, } from '@angular/common/http'
@@ -13,7 +13,7 @@ export class DishserviceService {
   constructor(private http: HttpClient) { }
 
     getDishes(): Observable<dish[]> {
-      return this.http.get<dish[]>("http://localhost:3000/" + 'dishes');
+      return this.http.get<dish[]>("http://localhost:3000/dishes");
     }
     getDish(id: string): Observable<dish> {
       return this.http.get<dish>("http://localhost:3000/dishes/" + id);
