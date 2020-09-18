@@ -28,6 +28,9 @@ import { CartService } from './services/cart.service'
 import { MatInputModule } from '@angular/material/input'
 import { MatSliderModule } from '@angular/material/slider'
 import { MatSnackBarModule } from '@angular/material/snack-bar'
+import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog'
+import { LoginDialogComponent } from './login-dialog/login-dialog.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +42,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar'
     CartComponent,
     MenuComponent,
     DishdetailComponent,
+    LoginDialogComponent,
     
   ],
   imports: [
@@ -58,8 +62,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar'
     MatFormFieldModule,
     MatInputModule,
     MatSliderModule,
-    MatSnackBarModule
-
+    MatSnackBarModule,
+    MatIconModule,
+    MatDialogModule
   ],
   providers: [
     DishserviceService,

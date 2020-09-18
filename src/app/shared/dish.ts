@@ -6,7 +6,7 @@ class Comment {
 }
 
 export class dish {
-    id: string;
+    _id: string;
     name : string;
     image: string;
     price: string;

@@ -5,20 +5,46 @@
     <div *ngIf = "empty">
         <h1>No items in the cart to display! <br> Ahead to MENU and add some items to the cart..</h1>
     </div>
-    <div fxFlex *ngIf = "cart">
-        <mat-grid-list cols='2' rowHeight = "220px">
-            <mat-grid-tile *ngFor = "let dish of cart" [@expand]>        
-                <img fxFlex='100' src="{{'http://localhost:3000/' + dish.image}}" alt={{dish.name}}>
-                <div fxFlex='100' class="details">
+    <!-- <div *ngIf = "cart" class="container">
+        <mat-grid-list cols='1' rowHeight = "220px">
+            <mat-grid-tile class="flex-container" *ngFor = "let dish of cart" [@expand]>        
+                <img  src="{{'http://localhost:3000/' + dish.image}}" alt={{dish.name}}>
+                <div class="details">
                     <h1>{{dish.name | uppercase}} </h1>
                     <h2>Quantity: <span>{{dish.quantity}}</span></h2>
                     <input type="number" #input min="0">
-                    <button color='primary' mat-button (click)="inputQuant(input.value, dish.id)">Apply</button>
+                    <button color='primary' mat-button (click)="inputQuant(input.value, dish._id)"><mat-icon>done</mat-icon> Apply</button>
                     <h2>Price : {{dish.price | currency: 'INR'}}</h2>
-                    <button color='warn' mat-button (click) = "remove(dish.id)">Remove from cart</button>
+                    <button color='warn' mat-button (click) = "remove(dish._id)"><mat-icon>delete</mat-icon> Remove from cart</button>
                 </div>
-            </mat-grid-tile>
+            </mat-grid-tile>            
         </mat-grid-list>
+    </div> -->
+
+    <div *ngIf="cart" class="dishes" 
+                    fxLayoutAlign='start' 
+                    fxLayout.sm='column' 
+                    fxLayout.xs='column' 
+                    fxLayoutAlign.md='space-between center' 
+                    fxLayoutAlign.sm='space-between center' 
+                    fxLayout='row wrap' 
+                    fxLayoutAlign.xs='center'>
+
+        <mat-card fxFlex *ngFor='let dish of cart'>
+            <mat-card-header> 
+                <mat-card-title>{{ dish.name | uppercase }} </mat-card-title>
+            </mat-card-header>
+            
+            <img mat-card-image src="{{'http://localhost:3000/' + dish.image}}" alt="">
+            <mat-card-content>
+                <h2>Price : {{dish.price | currency: 'INR'}}</h2>
+                <span>Quantity: <span>{{dish.quantity}}</span></span>
+                
+                <input type="number" #input min="0">
+                <button color='primary' mat-button (click)="inputQuant(input.value, dish._id)"><mat-icon>done</mat-icon> Apply</button>
+                <button color='warn' mat-button (click) = "remove(dish._id)"><mat-icon>delete</mat-icon>Remove from Cart</button> <br>
+            </mat-card-content>
+        </mat-card>
     </div>
     
     <div *ngIf='!cart'>

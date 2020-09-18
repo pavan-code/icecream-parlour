@@ -56,9 +56,11 @@ export class DishdetailComponent implements OnInit {
     let id = this.route.params
      .pipe(switchMap((params : Params) => {  return this.dishService.getDish(params['id']); }))
      .subscribe(dish => {
+      //  console.log(dish._id);
+      //  console.log(dish);
        this.dish = dish;
        this.dishCopy = dish;
-       this.setPrevNext(dish.id);
+       this.setPrevNext(dish._id);
       
       },
       error => {
@@ -79,6 +81,7 @@ export class DishdetailComponent implements OnInit {
     const index = this.dishIds.indexOf(id);
     this.prev = this.dishIds[(this.dishIds.length+index-1)% this.dishIds.length];
     this.next = this.dishIds[(this.dishIds.length+index+1)% this.dishIds.length]
+    // console.log(this.prev, this.next)
   }
   goBack(): void {
     this.location.back();
@@ -134,6 +137,7 @@ export class DishdetailComponent implements OnInit {
   }
 
   addToCart(dishId: string) {
+    // this.cartService.addCart(dishId)
     this.dishService.getDish(dishId)
     .subscribe(cartDish => {
       this.cartDish = cartDish;

@@ -13,20 +13,22 @@ export class CartService {
   constructor(private http: HttpClient, private processHTTPMsg: HttpmsgService) { }
 
   addCart(dish: dish): Observable<dish> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-type': 'application/json'
-      })
-    };
-    return this.http.post<dish>("http://localhost:3000/cart",dish, httpOptions)
+    // const httpOptions = {
+    //   headers: new HttpHeaders({
+    //     'Content-type': 'application/json'
+    //   })
+    // };
+    return this.http.post<dish>("http://localhost:3000/cart",dish)
     .pipe(catchError(this.processHTTPMsg.handleError));
   }
   getCartItems(): Observable<dish[]> {
     return this.http.get<dish[]>("http://localhost:3000/cart")
     .pipe(catchError(this.processHTTPMsg.handleError));
   }
-  updateQuantity(dish: dish): Observable<dish> {
-    return this.http.put<dish>("http://localhost:3000/cart/" + dish.id, dish)
+  updateQuantity(dish: any): Observable<dish> {
+    // console.log('dish: ',dish);
+    
+    return this.http.put<dish>("http://localhost:3000/cart/" + dish._id, dish)
     .pipe(catchError(this.processHTTPMsg.handleError));
   }
   deleteItemFromCart(id: string) : Observable<dish> {

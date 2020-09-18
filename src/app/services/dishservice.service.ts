@@ -19,9 +19,9 @@ export class DishserviceService {
       return this.http.get<dish>("http://localhost:3000/dishes/" + id);
     }
     getDishIds(): Observable<string[]> {
-      return this.getDishes().pipe(map(dishes => dishes.map(dish => dish.id)))
+      return this.getDishes().pipe(map(dishes => dishes.map(dish => dish._id)))
     }
     putDish(dish: dish): Observable<dish> {
-      return this.http.put<dish>("http://localhost:3000/dishes/"+ dish.id, dish);
+      return this.http.put<dish>("http://localhost:3000/dishes/"+ dish._id, dish);
     }
 }

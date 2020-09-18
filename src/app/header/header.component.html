@@ -1,9 +1,10 @@
 <mat-toolbar color='primary'>
     <span><img style="border-radius: 10px;" width="40px" src="http://localhost:3000/images/logo.png" alt="logo"></span>
-    <button color='primary' mat-flat-button routerLinkActive='active' routerLink = "/home">Home</button>
-    <button color='primary' mat-flat-button routerLinkActive='active' routerLink = "/menu">Menu</button>
-    <button color='primary' mat-flat-button routerLinkActive='active' routerLink = '/cart'>Cart</button>
+    <button color='primary' mat-flat-button routerLinkActive='active' routerLink = "/home"><mat-icon>home</mat-icon> Home</button>
+    <button color='primary' mat-flat-button routerLinkActive='active' routerLink = "/menu"><mat-icon>menu</mat-icon> Menu</button>
+    <button color='primary' mat-flat-button routerLinkActive='active' routerLink = '/cart'><mat-icon>shopping_cart</mat-icon> Cart</button>
     <span class="flex-spacer"></span>
+    <button color='primary' mat-flat-button (click) = "openDialog()" routerLinkActive='active'><mat-icon>login</mat-icon> Login</button>
     <!-- <button mat-raised-button routerLink = '/about'>About</button> -->
     <!-- <button mat-raised-button routerLink = '/contact'>Contact us</button> -->
 </mat-toolbar>

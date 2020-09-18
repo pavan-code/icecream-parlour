@@ -1,0 +1,71 @@
+<div class="login" *ngIf = "isLogin">
+    <h2 mat-dialog-title>Login</h2>
+    <mat-dialog-content>
+        <!-- {{ login.value | json}} -->
+        <form [formGroup] = "login" novalidate>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" formControlName="mailid">
+                <mat-error *ngIf = "formErrors.mailid">
+                    <small>{{formErrors.mailid}} </small>
+                </mat-error>
+            </div>
+    
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" formControlName='password'>
+                <mat-error *ngIf = "formErrors.password">
+                    <small>{{formErrors.password}} </small>
+                </mat-error>
+            </div>
+        </form>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button [disabled]='login.invalid' (click)="logIn()" mat-raised-button color='primary'><mat-icon>login</mat-icon> Login</button>
+    </mat-dialog-actions>
+    <br>
+    <h4>Don't have an account? <button mat-button color='primary' (click)="sign()">Create an account?</button></h4>
+</div>
+<div class="signup" *ngIf = "!isLogin">
+    <h2 mat-dialog-title>Sign Up</h2>
+    <mat-dialog-content>
+        <form [formGroup] = "signup">
+            <div class="form-group">
+                <label for="firstname">First name</label>
+                <input type="text" class="form-control" formControlName = 'firstname'>
+                <mat-error *ngIf = "formErrors1.firstname">
+                    <small>{{formErrors1.firstname}} </small>
+                </mat-error>
+            </div>
+
+            <div class="form-group">
+                <label for="lastname">Last name</label>
+                <input type="text" class="form-control" formControlName = 'lastname'>
+                <mat-error *ngIf = "formErrors1.lastname">
+                    <small>{{formErrors1.lastname}} </small>
+                </mat-error>
+            </div>
+
+            <div class="form-group">
+                <label for="mailid">Mail ID</label>
+                <input type="text" class="form-control" formControlName = 'mailid'>
+                <mat-error *ngIf = "formErrors1.mailid">
+                    <small>{{formErrors1.mailid}} </small>
+                </mat-error>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" formControlName = 'password'>
+                <mat-error *ngIf = "formErrors1.password">
+                    <small>{{formErrors1.password}} </small>
+                </mat-error>
+            </div>
+        </form>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button [disabled]='signup.invalid' (click)="register()" mat-raised-button color='primary'>Sign Up</button>
+    </mat-dialog-actions>
+     <br>
+    <h4>Already have an account? <button mat-button color='primary' (click) = "log()">Login</button></h4>
+</div>

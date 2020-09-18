@@ -31,7 +31,7 @@ fxLayoutGap.xs="0" >
                       </div>
                     <button mat-button (click) = 'goBack()'>Back</button>
                     <!-- <span class="flex-spacer"></span> -->
-                    <button mat-button (click) ="addToCart(dish.id)">Add to cart</button>
+                    <button mat-button (click) ="addToCart(dish._id)">Add to cart</button>
                     <button mat-button [routerLink]="['/dishdetail', next]"><span class="fa fa-chevron-right"></span></button>
                 </mat-card-actions>
             </mat-card>

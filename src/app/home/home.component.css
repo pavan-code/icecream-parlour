@@ -22,3 +22,24 @@ img {
 .center p {
     font-size: 2vw;
 }
+
+.mouseicon {
+    /* position: absolute; */
+    bottom: 50px;
+    right: 15px;
+	opacity: 0;
+	z-index: 1100;
+    transition: all .2s ease-in-out;
+}
+
+
+
+  .topdown {
+      position: fixed;
+      bottom: 15px;
+      left: 15px;
+	  opacity: 0;
+	  z-index: 1100;
+      transition: all .2s ease-in-out;
+  }
+

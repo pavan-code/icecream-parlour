@@ -2,9 +2,10 @@
     <div fxFlex>
         <h1>Ice creams</h1>
     </div>
+    <!-- {{ DISHES | json }} -->
     <div fxFlex *ngIf = "DISHES">        
         <mat-grid-list [cols]='breakpoint' rowHeight = "220px" (window:resize)="onResize($event)" [@expand]>
-            <mat-grid-tile *ngFor = "let dish of DISHES" [routerLink] = "['/dishdetail/' + dish.id]" appHighlight>
+            <mat-grid-tile *ngFor = "let dish of DISHES" [routerLink] = "['/dishdetail/' + dish._id]" appHighlight>
                 <img width="300px" height="200px" src="{{'http://localhost:3000/' + dish.image}}" alt={{dish.name}}>
                 <mat-grid-tile-footer>
                     <h1>{{dish.name | uppercase}} </h1>

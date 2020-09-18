@@ -11,3 +11,9 @@ body { margin: 0; font-family: cursive; }
     outline: none !important;
     outline-style: none !important;
 }
+/* :root {
+  filter: invert(100%);
+} */
+ iframe, img, html {
+      filter: invert() hue-rotate(180deg) brightness(100%) contrast(100%);
+  }

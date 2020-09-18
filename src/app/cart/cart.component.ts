@@ -43,9 +43,7 @@ export class CartComponent implements OnInit {
       // console.log("Item removed from the cart.");
       this.openSnackBar("Item removed from the cart", "close")
       // this.findTotalCost();
-      setTimeout(() => {
-        location.reload();
-      }, 2000);
+     this.ngOnInit();
       
     });
   }
@@ -59,22 +57,22 @@ export class CartComponent implements OnInit {
   }
 
   inputQuant(input: number, id: string) {
+    // console.log(input, id);
     if (Math.floor(input) > 0) {
       input = Math.floor(input);
-      this.dishService.getDish(id).subscribe(dish => {
-      this.updatedDish = dish;
-      this.updatedDish['quantity'] = input;
-      this.cartService.updateQuantity(this.updatedDish).subscribe(
+      // this.dishService.getDish(id).subscribe(dish => {
+      // this.updatedDish = dish;
+      // this.updatedDish['quantity'] = input;
+      // console.log(this.updatedDish)
+      this.cartService.updateQuantity( { _id : id, quantity : input } ).subscribe(
         dish => {
           this.updatedDish = dish;
           this.openSnackBar("Quantity updated successfully","close")
           // this.findTotalCost();
           this.empty = this.isEmpty(this.cart);
-          setTimeout(() => {
-            location.reload();
-          }, 2000);
+          this.ngOnInit();
         });
-      });
+      // });
     }
     else if (Math.floor(input) == 0) {
       this.remove(id)
@@ -82,7 +80,9 @@ export class CartComponent implements OnInit {
     else {
       this.openSnackBar("Enter a positive integer", 'close');
       setTimeout(() => {
-        location.reload();
+        // location.reload();
+      this.ngOnInit();
+
       }, 2000);
     }
     
