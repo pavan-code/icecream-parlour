@@ -12,13 +12,13 @@ export class CartService {
 
   constructor(private http: HttpClient, private processHTTPMsg: HttpmsgService) { }
 
-  addCart(dish: dish): Observable<dish> {
+  addCart(dishId: string): Observable<dish> {
     // const httpOptions = {
     //   headers: new HttpHeaders({
     //     'Content-type': 'application/json'
     //   })
     // };
-    return this.http.post<dish>("http://localhost:3000/cart",dish)
+    return this.http.post<dish>("http://localhost:3000/cart",  {dishId} )
     .pipe(catchError(this.processHTTPMsg.handleError));
   }
   getCartItems(): Observable<dish[]> {

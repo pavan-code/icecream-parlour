@@ -19,7 +19,7 @@ export class LoginDialogComponent implements OnInit {
   }
   login: FormGroup;
   signup: FormGroup;
-   
+   isHidden: boolean = true;
   isLogin = true;
   sign() {
     this.isLogin = false;
@@ -28,22 +28,18 @@ export class LoginDialogComponent implements OnInit {
     this.isLogin = true;
   }
   formErrors = {
-    'mailid' : '',
+    'username' : '',
     'password' : ''
   } 
   formErrors1 = {
-    'firstname' : '',
-    'lastname' : '',
+    'username' : '',    
     'mailid' : '',
     'password' : ''
   }
   validationMsgs1 = {
-    'firstname' : {
-      'required' : 'Please enter your firstname'
-    },
-    'lastname' : {
-      'required' : 'Please enter your lastname'
-    },
+    'username' : {
+      'required' : 'Please enter your username'
+    },  
     'mailid' : {
       'required' : 'Please enter your mail id',
       'email' : 'Please provide a valid mail'
@@ -54,8 +50,8 @@ export class LoginDialogComponent implements OnInit {
     }
   }
   validationMsgs = {
-    'mailid' : {
-      'required' : 'Mail ID is required'
+    'username' : {
+      'required' : 'Username is required'
     },
     'password' : {
       'required' : "Password is required"
@@ -63,14 +59,14 @@ export class LoginDialogComponent implements OnInit {
   }
   createForm() {
     this.login = this.fb.group({
-      mailid : ['', [Validators.required]],
+      username : ['', [Validators.required]],
       password : ['', [Validators.required]]
     });
     this.login.valueChanges.subscribe(data => this.onValueChanged(data));
 
     this.signup = this.fb.group({
-      firstname : ['', [Validators.required]],
-      lastname : ['', [Validators.required]],
+      username : ['', [Validators.required]],
+      
       mailid : ['', [Validators.required, Validators.email]], 
       password : ['', [Validators.required, Validators.minLength(8)]]
     })
@@ -116,10 +112,12 @@ export class LoginDialogComponent implements OnInit {
   }
 
   register() {
+    this.isHidden = false;
     console.log(this.signup.value);
     
     this.AuthService.register(this.signup.value)
     .subscribe(user =>{
+      this.isHidden = true
       console.log(user);   
          this.dialogRef.close();
          this.snackbar.open("Signed up Successfully", 'close', {
@@ -135,17 +133,26 @@ export class LoginDialogComponent implements OnInit {
     )
   }
   logIn() {
+    this.isHidden = false;
+    // console.log('sent request to the server..', this.login.value)
     this.AuthService.login(this.login.value)
     .subscribe(user => {
-      console.log(user);
-      this.dialogRef.close();
-      this.snackbar.open("Logged in Successfully", 'close', {
-        duration: 2000,
-        horizontalPosition: 'center',
-        verticalPosition: 'top'
-      })
+      // console.log('got user from the server..', user);
+      localStorage.setItem('JWT_TOKEN', user.token)
+      localStorage.setItem('expiresIn', user.expiresIn);
+      setTimeout(() => {        
+        this.isHidden = true;
+        this.dialogRef.close(true);
+        this.snackbar.open("Logged in Successfully", 'close', {
+          duration: 2000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top'
+        })
+      }, 2500);
+      
     }, err => {
-      console.log(err)
+      console.log('got error from the server', err);
+          
       this.dialogRef.close();
       this.snackbar.open(err.error.errorMessage, 'close', {
         duration: 2000,

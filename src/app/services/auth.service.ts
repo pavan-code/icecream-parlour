@@ -21,4 +21,8 @@ export class AuthService {
  getUsers(): Observable<user[]> {
    return this.http.get<user[]>("http://localhost:3000/users")
  }
+
+ getToken() {
+   return localStorage.getItem('JWT_TOKEN')
+ }
 }

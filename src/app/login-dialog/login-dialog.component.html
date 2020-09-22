@@ -1,13 +1,13 @@
-<div class="login" *ngIf = "isLogin">
+<div class="login" *ngIf = "isLogin" [hidden]="!isHidden">
     <h2 mat-dialog-title>Login</h2>
     <mat-dialog-content>
         <!-- {{ login.value | json}} -->
         <form [formGroup] = "login" novalidate>
             <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" class="form-control" formControlName="mailid">
-                <mat-error *ngIf = "formErrors.mailid">
-                    <small>{{formErrors.mailid}} </small>
+                <input type="text" class="form-control" formControlName="username">
+                <mat-error *ngIf = "formErrors.username">
+                    <small>{{formErrors.username}} </small>
                 </mat-error>
             </div>
     
@@ -26,23 +26,15 @@
     <br>
     <h4>Don't have an account? <button mat-button color='primary' (click)="sign()">Create an account?</button></h4>
 </div>
-<div class="signup" *ngIf = "!isLogin">
+<div class="signup" *ngIf = "!isLogin" [hidden]="!isHidden">
     <h2 mat-dialog-title>Sign Up</h2>
     <mat-dialog-content>
         <form [formGroup] = "signup">
             <div class="form-group">
-                <label for="firstname">First name</label>
-                <input type="text" class="form-control" formControlName = 'firstname'>
-                <mat-error *ngIf = "formErrors1.firstname">
-                    <small>{{formErrors1.firstname}} </small>
-                </mat-error>
-            </div>
-
-            <div class="form-group">
-                <label for="lastname">Last name</label>
-                <input type="text" class="form-control" formControlName = 'lastname'>
-                <mat-error *ngIf = "formErrors1.lastname">
-                    <small>{{formErrors1.lastname}} </small>
+                <label for="username">Username</label>
+                <input type="text" class="form-control" formControlName = 'username'>
+                <mat-error *ngIf = "formErrors1.username">
+                    <small>{{formErrors1.username}} </small>
                 </mat-error>
             </div>
 
@@ -68,4 +60,9 @@
     </mat-dialog-actions>
      <br>
     <h4>Already have an account? <button mat-button color='primary' (click) = "log()">Login</button></h4>
+</div>
+
+<div class="spinner" [hidden]="isHidden">
+    <mat-spinner style="margin: 0 auto;" [diameter]='100' strokeWidth='2'></mat-spinner>
+    <h2 style="margin: 10px 60px;">You are almost there.. hold on</h2>
 </div>

@@ -22,10 +22,16 @@ export class CartComponent implements OnInit {
     private snackBar: MatSnackBar) { }
   // quantity: number;
   ngOnInit(): void {
-    this.cartService.getCartItems().subscribe(cart => {
-        this.cart = cart;
+    this.cartService.getCartItems()
+    .subscribe(cart => {
+      console.log(cart)
+        this.cart = cart
         this.findTotalCost();
         this.empty = this.isEmpty(this.cart);
+        // this.empty = false
+      }, err => {
+        // console.log(err);        
+        this.empty = true
       });
   }
   openSnackBar(message: string, action: string) {
@@ -67,11 +73,13 @@ export class CartComponent implements OnInit {
       this.cartService.updateQuantity( { _id : id, quantity : input } ).subscribe(
         dish => {
           this.updatedDish = dish;
+          console.log('updated dish: ',this.updatedDish)
           this.openSnackBar("Quantity updated successfully","close")
           // this.findTotalCost();
           this.empty = this.isEmpty(this.cart);
           this.ngOnInit();
-        });
+        }, err =>  console.log(err)
+        );
       // });
     }
     else if (Math.floor(input) == 0) {

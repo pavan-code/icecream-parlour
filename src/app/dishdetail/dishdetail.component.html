@@ -15,7 +15,7 @@ fxLayoutGap.xs="0" >
                         <h2>{{dish.name | uppercase}} </h2>
                     </mat-card-title>
                 </mat-card-header>
-                <img matCardImage src="{{'http://localhost:3000/' + dish.image}}" alt="">
+                <img matCardImage height="300px"src="{{'http://localhost:3000/' + dish.image}}" alt="">
                 <mat-card-content>
                     <p>{{dish.description}} </p>
                     <h3>Price</h3>
@@ -56,12 +56,12 @@ fxLayoutGap.xs="0" >
         <div fxFlex>
             <h2 >Leave a comment</h2>
             <form novalidate [formGroup]="commentForm" (ngSubmit) = "submit()">
-                <mat-form-field class="full-width">
+                <!-- <mat-form-field class="full-width">
                     <input type="text" matInput formControlName = "author" placeholder="Name">
                     <mat-error *ngIf = "commentErrors.author">
                         {{commentErrors.author}}
                     </mat-error>
-                </mat-form-field> <br>
+                </mat-form-field> <br> -->
                 <mat-slider formControlName = "rating" min='1' max='5' step='1' value='5' tickInterval='1' thumbLabel></mat-slider> <br>
                 <mat-form-field class="full-width"> 
                     <textarea name="" placeholder="Your comment .." matInput formControlName = "comment" id="" cols="30" rows="10"></textarea>
@@ -87,7 +87,7 @@ fxLayoutGap.xs="0" fxFLex ='50' *ngIf = 'dish'>
         <mat-list-item *ngFor = "let comment of dish.comments">
             <h4 matLine>{{comment.comment}} </h4>
             <p matLine>{{comment.rating}} Stars </p>
-            <p matLine>-- {{comment.author}} {{comment.date | date}} </p>
+            <p matLine>-- {{comment.author}} {{comment.updatedAt | date}} </p>
         </mat-list-item>
     </mat-list>
 </div>

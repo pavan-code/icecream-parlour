@@ -1,5 +1,5 @@
 <div fxFlex class="container" fxLayoutGap="20px" fxLayout='column' fxLayoutAlign='center'>
-    <div fxFlex>
+    <div fxFlex *ngIf = "cart">
         <h1>Cart items</h1>
     </div>
     <div *ngIf = "empty">
@@ -21,7 +21,7 @@
         </mat-grid-list>
     </div> -->
 
-    <div *ngIf="cart" class="dishes" 
+    <div *ngIf="cart != []" class="dishes" 
                     fxLayoutAlign='start' 
                     fxLayout.sm='column' 
                     fxLayout.xs='column' 
@@ -31,6 +31,7 @@
                     fxLayoutAlign.xs='center'>
 
         <mat-card fxFlex *ngFor='let dish of cart'>
+            
             <mat-card-header> 
                 <mat-card-title>{{ dish.name | uppercase }} </mat-card-title>
             </mat-card-header>

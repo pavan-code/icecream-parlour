@@ -22,19 +22,19 @@ export class DishdetailComponent implements OnInit {
   dish: dish;
   comment: comment;
   dishCopy: dish;
-  dishIds: string[];
+  dishIds: string[] = [];
   commentForm: FormGroup;
   prev: string;
   next: string;
   commentErrors = {
-    'author' : '',
+    // 'author' : '',
     'comment': ''
   }
   validationMessages = {
-    'author' : {
-      'required': 'Author Name is required',
-      'minlength': 'Author Name must be at least 2 characters long'
-    },
+    // 'author' : {
+    //   'required': 'Author Name is required',
+    //   'minlength': 'Author Name must be at least 2 characters long'
+    // },
     'comment': {
       'required': 'Comment is required'
     }
@@ -51,7 +51,9 @@ export class DishdetailComponent implements OnInit {
               private httpMsgService: HttpmsgService) { }
 
   ngOnInit(): void {
-    this.dishService.getDishIds().subscribe(dishIds => this.dishIds = dishIds)
+    this.dishService.getDishIds()
+    .subscribe(dishIds => this.dishIds = dishIds) 
+    // console.log(this.dishIds)
     this.createForm();
     let id = this.route.params
      .pipe(switchMap((params : Params) => {  return this.dishService.getDish(params['id']); }))
@@ -88,7 +90,7 @@ export class DishdetailComponent implements OnInit {
   }
   createForm() {
     this.commentForm = this.fb.group({
-        author : ['', [Validators.required, Validators.minLength(2)]],
+        // author : ['', [Validators.required, Validators.minLength(2)]],
         rating : [5],
         comment : ['', [Validators.required]]
     })
@@ -117,6 +119,7 @@ export class DishdetailComponent implements OnInit {
     this.comment = this.commentForm.value;
     this.comment.date = new Date().toISOString();
     this.dish.comments.push(this.comment);
+    console.log(this.dish)
     this.dishService.putDish(this.dish)
     .subscribe(dish => {
       this.dish = dish;
@@ -138,19 +141,22 @@ export class DishdetailComponent implements OnInit {
 
   addToCart(dishId: string) {
     // this.cartService.addCart(dishId)
-    this.dishService.getDish(dishId)
-    .subscribe(cartDish => {
-      this.cartDish = cartDish;
-      this.cartDish['quantity']=1;
-      this.cartService.addCart(this.cartDish)
+    // this.dishService.getDish(dishId)
+    // .subscribe(cartDish => {
+    //   this.cartDish = cartDish;
+    //   this.cartDish['quantity']=1;
+      // console.log(this.cartDish)
+      this.cartService.addCart(dishId)
       .subscribe(cartDish => {
+        // console.log('cart items: ',cartDish)
          this.cartDish = cartDish;
          this.openSnackBar("Item added to the cart successfully", "close")        
         }, error => {
           this.errMsg = error;
+          // console.log('error: ',this.errMsg)
           this.openSnackBar("Item is already in the cart","close");
         });
-      })
+      // })
     }
 
     // $(function() {
