@@ -30,7 +30,8 @@
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "typescript": "~3.8.3",
-    "zone.js": "~0.10.2"
+    "zone.js": "~0.10.2",
+     "webpack-subresource-integrity": ">=1.5.1"
   },
   "engines": {
     "node": "12.13.1",
